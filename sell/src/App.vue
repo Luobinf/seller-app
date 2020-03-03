@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-header></v-header>
-    <div class="tab">
+    <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods" active-class="is-active">
           商品
