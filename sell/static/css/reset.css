@@ -18,9 +18,12 @@ time, mark, audio, video, input {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
-  font-weight: normal;
-  vertical-align: baseline;
+  font-weight: 200;
+}
+
+/*重置字体*/
+body,html{
+  font-family: 'PingFang SC','STHeitiSC-Light','Helvetica-Light',arial,sans-serif;
 }
 
 /* HTML5 display-role reset for older browsers */

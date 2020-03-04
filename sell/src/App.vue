@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods" active-class="is-active">
@@ -24,9 +24,28 @@
 
 <script>
   import Header from './components/header/Header.vue'
+
+  const ERRNO_OK = 0
+
   export default {
+    data() {
+      return {
+        seller: {}
+      }
+    },
     components: {
       'v-header': Header
+    },
+    created() {
+      this.$http.get('/api/seller').then( (response) => {
+        let {errno,data} = response.body
+        if(errno === ERRNO_OK){
+          this.seller = data
+          console.log(data)
+        }
+      },(error) => {
+        console.log(error)
+      })
     }
   }
 </script>
@@ -42,6 +61,7 @@
       height: 40px;
       line-height: 40px;
       position: relative;
+      background-color: #7e8c8d;
       &::after {
         display: block;
         width: 100%;

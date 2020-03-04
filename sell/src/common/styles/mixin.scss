@@ -1,0 +1,9 @@
+//使用sass的@mixin方法给大量的重复性样式实现重用，提高代码的复用性。
+
+@mixin imgTo2Or3($url){
+  background-image: url($url + "@2x.png");
+  @media (-webkit-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    background-image: url($url + "@3x.png");
+  }
+}
+
