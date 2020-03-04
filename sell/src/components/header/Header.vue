@@ -132,7 +132,7 @@ export default {
         bottom: 14px;
         padding: 3px 8px;
         border-radius: 14px;
-        background: rgba(255,0,0.7);
+        background-color: rgba(7,17,27,0.25);
         .count {
           color: white;
           font-weight: 200;
