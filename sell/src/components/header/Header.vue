@@ -27,6 +27,9 @@
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
+    <div class="header-bg">
+      <img :src="seller.avatar" width="100%" height="100%">
+    </div>
   </header>
 </template>
 
@@ -52,6 +55,8 @@ export default {
 <style scoped lang="scss">
   @import "../../common/styles/mixin.scss";
   .header {
+    position: relative;
+    background-color: rgba(7,17,27,0.5);
     .content-wrapper {
       position: relative;
       display: flex;
@@ -169,6 +174,15 @@ export default {
         right: 4px;
         bottom: 5px;
       }
+    }
+    .header-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1000;
+      filter: blur(15px);
     }
   }
 </style>
