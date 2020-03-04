@@ -61,7 +61,7 @@
       height: 40px;
       line-height: 40px;
       position: relative;
-      background-color: #7e8c8d;
+      /*background-color: #7e8c8d;*/
       &::after {
         display: block;
         width: 100%;

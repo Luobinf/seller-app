@@ -57,6 +57,7 @@ export default {
   .header {
     position: relative;
     background-color: rgba(7,17,27,0.5);
+    overflow: hidden;
     .content-wrapper {
       position: relative;
       display: flex;
