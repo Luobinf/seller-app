@@ -17,18 +17,145 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div class="support-count" v-if="seller.supports">
+      <div class="support-count" v-if="seller.supports" @click="showDetail">
         <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
     <div class="header-bg">
       <img :src="seller.avatar" width="100%" height="100%">
+    </div>
+    <div class="detail" v-show="detailShow">
+      <div class="detail-main">
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+        我是弹窗内容区域高度
+      </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+        <p>
+          我是弹窗内容区域高度
+        </p>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
     </div>
   </header>
 </template>
@@ -38,7 +165,7 @@ export default {
   name: 'Header',
   data () {
     return {
-
+      detailShow: false
     }
   },
   props: {
@@ -48,6 +175,11 @@ export default {
   },
   created() {
     this.classMap = ['decrease','discount','special','invoice','guarantee']
+  },
+  methods: {
+    showDetail() {
+      this.detailShow = true
+    }
   }
 }
 </script>
@@ -184,6 +316,29 @@ export default {
       height: 100%;
       z-index: -1000;
       filter: blur(15px);
+    }
+    .detail {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      overflow: auto;
+      background-color: rgba(7,17,27,0.8);
+      .detail-main {
+        flex: 1;
+      }
+      .detail-close {
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+        .icon-close {
+
+        }
+      }
     }
   }
 </style>
