@@ -7,6 +7,10 @@
       transform: scaleY(0.7);
     }
   }
+  .border-bottom-1px {
+    -webkit-transform: scaleY(0.7);
+    transform: scaleY(0.7);
+  }
 }
 
 @media (-webkit-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
@@ -16,6 +20,10 @@
       transform: scaleY(0.5);
     }
   }
+  .border-bottom-1px {
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
 }
 
 @media (-webkit-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
@@ -24,6 +32,10 @@
       -webkit-transform: scaleY(0.3);
       transform: scaleY(0.3);
     }
+  }
+  .border-bottom-1px {
+    -webkit-transform: scaleY(0.3);
+    transform: scaleY(0.3);
   }
 }
 

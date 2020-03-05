@@ -37,13 +37,13 @@
       'v-header': Header
     },
     created() {
-      this.$http.get('/api/seller').then( (response) => {
-        let {errno,data} = response.body
-        if(errno === ERRNO_OK){
+      this.$http.get('/api/seller').then((response) => {
+        let {errno, data} = response.body
+        if (errno === ERRNO_OK) {
           this.seller = data
           console.log(data)
         }
-      },(error) => {
+      }, (error) => {
         console.log(error)
       })
     }
@@ -51,9 +51,11 @@
 </script>
 <style lang="scss">
   @import "../static/css/reset.css";
+
   * {
     box-sizing: border-box;
   }
+
   #app {
     .tab {
       display: flex;
@@ -71,15 +73,18 @@
         bottom: 0;
         border-bottom: 1px solid red;
       }
+
       .tab-item {
         flex-grow: 1;
         text-align: center;
+
         & > a {
           display: block;
           font-size: 14px;
           color: #4d555d;
+
           &.is-active {
-            color: rgb(240,20,20);
+            color: rgb(240, 20, 20);
           }
         }
       }
