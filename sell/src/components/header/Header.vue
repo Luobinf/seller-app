@@ -86,6 +86,7 @@
     name: 'Header',
     data() {
       return {
+        classMap: [],
         detailShow: false
       }
     },
