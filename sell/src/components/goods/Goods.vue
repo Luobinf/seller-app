@@ -90,13 +90,13 @@
     width: 100%;
     top: 173px;
     bottom: 46px;
-    overflow: hidden;
 
     .menu-wrapper {
       flex: 0 0 80px;
       /*安卓兼容性问题，把宽度写上*/
       width: 80px;
       background-color: #f3f5f7;
+      overflow: hidden;
       .menu {
         .menu-item {
           display: table;
@@ -143,6 +143,7 @@
 
     .foods-wrapper {
       flex: 1;
+      overflow: hidden;
       .title {
         padding: 8px 0 8px 12px;
         border-left: 2px solid #d9dde1;
