@@ -2,7 +2,9 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menu-wrapper">
       <ul class="menu">
-        <li v-for="item in goods" :key="item.name" class="menu-item">
+        <li v-for="(item,index) in goods" :key="item.name" class="menu-item"
+          :class="{'is-active': index === currentIndex}" @click="selectMenu(index)"
+        >
           <span class="text border-1px">
             <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -10,8 +12,8 @@
       </ul>
     </div>
     <div class="foods-wrapper" ref="foods-wrapper">
-      <ul>
-        <li v-for="item in goods" class="food-list">
+      <ul ref="foods">
+        <li v-for="item in goods" class="food-list" ref="food-list">
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px">
@@ -48,7 +50,9 @@
     data() {
       return {
         classMap:['decrease', 'discount', 'special', 'invoice', 'guarantee'],
-        goods: []
+        goods: [],
+        listHeight:[],
+        scrollY: 0
       }
     },
     props: {
@@ -56,24 +60,62 @@
         type: Object
       }
     },
-    created() {
-      this.$http.get('/api/goods').then((response) => {
-        let {errno, data} = response.body
-        if (errno === ERRNO_OK) {
-          this.goods = data
-          this.$nextTick(() => {
-            //这里确保获取到了两个ul列表的实际高度
-            this.initScroll()
-          })
+    computed: {
+      currentIndex() {
+        for(let i=0;i<this.listHeight.length;i++) {
+          let height1 = this.listHeight[i]
+          let height2 = this.listHeight[i+1]
+          if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+            return i
+          }
         }
-      }, (error) => {
-        throw new Error(error)
-      })
+        return 0
+      }
+    },
+    created() {
+      this.getFoodsData()
     },
     methods: {
+      getFoodsData() {
+        this.$http.get('/api/goods').then((response) => {
+          let {errno, data} = response.body
+          if (errno === ERRNO_OK) {
+            this.goods = data
+            this.$nextTick(() => {
+              //这里确保获取到了两个ul列表的实际高度
+              this.initScroll()
+              this.calculateHeight()
+            })
+          }
+        }, (error) => {
+          throw new Error(error)
+        })
+      },
       initScroll() {
-        new BScroll(this.$refs['menu-wrapper'])
-        new BScroll(this.$refs['foods-wrapper'])
+        new BScroll(this.$refs['menu-wrapper'],{
+          click: true
+        })
+         this.foodsScroll = new BScroll(this.$refs['foods-wrapper'],{
+          probeType: 3
+        })
+        this.foodsScroll.on('scroll',(pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y))
+          console.log(this.scrollY)
+        })
+      },
+      calculateHeight() {
+        let foodList = this.$refs['food-list']
+        let height = 0
+        this.listHeight.push(height)
+        foodList.forEach((item) => {
+          height +=item.offsetHeight
+          this.listHeight.push(height)
+        })
+      },
+      selectMenu(index) {
+        let foodList = this.$refs['food-list']
+        let el = foodList[index]
+        this.foodsScroll.scrollToElement(el,300)
       }
     },
   }
@@ -101,6 +143,13 @@
           width: 80px;
           height: 54px;
           padding: 0 12px;
+          &.is-active {
+            background-color: white;
+            margin-top: -1px;
+            .text {
+              border: none;
+            }
+          }
           .text {
             display: table-cell;
             vertical-align: middle;
