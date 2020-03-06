@@ -61,24 +61,21 @@
         let {errno, data} = response.body
         if (errno === ERRNO_OK) {
           this.goods = data
+          this.$nextTick(() => {
+            //这里确保获取到了两个ul列表的实际高度
+            this.initScroll()
+          })
         }
       }, (error) => {
         throw new Error(error)
       })
     },
     methods: {
-      _initScroll() {
-        let menuScroll = new BScroll(this.$refs['menu-wrapper'])
-        let foodsScroll = new BScroll(this.$refs['foods-wrapper'])
-        console.log(menuScroll)
-        console.log(foodsScroll)
+      initScroll() {
+        new BScroll(this.$refs['menu-wrapper'])
+        new BScroll(this.$refs['foods-wrapper'])
       }
     },
-    mounted() {
-      this.$nextTick( () => {
-        this._initScroll()
-      })
-    }
   }
 </script>
 
@@ -90,6 +87,7 @@
     width: 100%;
     top: 173px;
     bottom: 46px;
+    /*height: calc(100vh - 173px - 46px);*/
 
     .menu-wrapper {
       flex: 0 0 80px;
