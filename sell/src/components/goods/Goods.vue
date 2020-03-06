@@ -3,7 +3,7 @@
     <div class="menu-wrapper" ref="menu-wrapper">
       <ul class="menu">
         <li v-for="(item,index) in goods" :key="item.name" class="menu-item"
-          :class="{'is-active': index === currentIndex}" @click="selectMenu(index)"
+            :class="{'is-active': index === currentIndex}" @click="selectMenu(index)"
         >
           <span class="text border-1px">
             <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
@@ -37,11 +37,16 @@
         </li>
       </ul>
     </div>
+    <shop-cart :delivery-price="seller.deliveryPrice"
+      :min-price="seller.minPrice"
+    >
+    </shop-cart>
   </div>
 </template>
 
 <script type="text/javascript">
   import BScroll from '@better-scroll/core'
+  import shopCart from '../shopCart/ShopCart.vue'
 
   const ERRNO_OK = 0
 
@@ -49,10 +54,10 @@
     name: 'Goods',
     data() {
       return {
-        classMap:['decrease', 'discount', 'special', 'invoice', 'guarantee'],
+        classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
         goods: [],
-        listHeight:[],
-        scrollY: 0
+        listHeight: [],
+        scrollY: 0,
       }
     },
     props: {
@@ -62,15 +67,18 @@
     },
     computed: {
       currentIndex() {
-        for(let i=0;i<this.listHeight.length;i++) {
+        for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i]
-          let height2 = this.listHeight[i+1]
-          if(!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          let height2 = this.listHeight[i + 1]
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
             return i
           }
         }
         return 0
       }
+    },
+    components: {
+      shopCart
     },
     created() {
       this.getFoodsData()
@@ -92,13 +100,13 @@
         })
       },
       initScroll() {
-        new BScroll(this.$refs['menu-wrapper'],{
+        new BScroll(this.$refs['menu-wrapper'], {
           click: true
         })
-         this.foodsScroll = new BScroll(this.$refs['foods-wrapper'],{
+        this.foodsScroll = new BScroll(this.$refs['foods-wrapper'], {
           probeType: 3
         })
-        this.foodsScroll.on('scroll',(pos) => {
+        this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y))
         })
       },
@@ -107,14 +115,14 @@
         let height = 0
         this.listHeight.push(height)
         foodList.forEach((item) => {
-          height +=item.offsetHeight
+          height += item.offsetHeight
           this.listHeight.push(height)
         })
       },
       selectMenu(index) {
         let foodList = this.$refs['food-list']
         let el = foodList[index]
-        this.foodsScroll.scrollToElement(el,300)
+        this.foodsScroll.scrollToElement(el, 300)
       }
     },
   }
@@ -122,12 +130,13 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin.scss";
+
   .goods {
     display: flex;
     position: absolute;
     width: 100%;
     top: 173px;
-    bottom: 46px;
+    bottom: 44px;
     /*height: calc(100vh - 173px - 46px);*/
 
     .menu-wrapper {
@@ -136,25 +145,30 @@
       width: 80px;
       background-color: #f3f5f7;
       overflow: hidden;
+
       .menu {
         .menu-item {
           display: table;
           width: 80px;
           height: 54px;
           padding: 0 12px;
+
           &.is-active {
             background-color: white;
             margin-top: -1px;
+
             .text {
               border: none;
             }
           }
+
           .text {
             display: table-cell;
             vertical-align: middle;
             font-size: 12px;
-            border-bottom: 1px solid rgba(7,17,27,0.1);
+            border-bottom: 1px solid rgba(7, 17, 27, 0.1);
             text-align: center;
+
             .icon {
               display: inline-block;
               width: 12px;
@@ -162,6 +176,7 @@
               background-size: 12px 12px;
               background-repeat: no-repeat;
               margin-right: 2px;
+
               &.decrease {
                 @include imgTo2Or3("decrease_3");
               }
@@ -190,6 +205,7 @@
     .foods-wrapper {
       flex: 1;
       overflow: hidden;
+
       .title {
         padding: 8px 0 8px 12px;
         border-left: 2px solid #d9dde1;
@@ -197,44 +213,53 @@
         font-size: 12px;
         color: #93999f;
       }
+
       .food-item {
         display: flex;
         margin: 18px 18px 0 18px;
         padding-bottom: 18px;
-        border-bottom: 1px solid rgba(7,17,27,0.1);
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+
         &:last-child {
           border-bottom: none;
         }
+
         .icon {
           flex-basis: 58px;
           /*兼容安卓手机*/
           width: 58px;
           height: 58px;
         }
+
         .content {
           flex: 1;
           margin-left: 10px;
+
           .name {
             padding: 2px 0 4px 0;
             font-size: 14px;
             color: #07111b;
             font-weight: 500;
           }
+
           .desc {
             padding: 2px 0;
             font-size: 10px;
-            color: rgb(147,153,159);
+            color: rgb(147, 153, 159);
             font-weight: 500;
           }
+
           .extra {
             padding: 2px 0;
             font-size: 12px;
-            color: rgb(147,153,159);
+            color: rgb(147, 153, 159);
             font-weight: 500;
+
             span:last-child {
               margin-left: 10px;
             }
           }
+
           .price {
             .newPrice {
               font-size: 14px;
@@ -242,10 +267,11 @@
               color: red;
               margin-right: 8px;
             }
+
             .oldPrice {
               font-size: 12px;
               font-weight: 700;
-              color: rgb(147,153,159);
+              color: rgb(147, 153, 159);
               text-decoration: line-through;
             }
           }

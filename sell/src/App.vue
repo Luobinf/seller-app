@@ -18,7 +18,7 @@
         </router-link>
       </div>
     </div>
-    <router-view/>
+    <router-view :seller="seller" />
   </div>
 </template>
 
@@ -41,7 +41,6 @@
         let {errno, data} = response.body
         if (errno === ERRNO_OK) {
           this.seller = data
-          console.log(data)
         }
       }, (error) => {
         console.log(error)
@@ -71,7 +70,7 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        border-bottom: 1px solid red;
+        border-bottom: 1px solid rgba(7,17,27,0.1);
       }
 
       .tab-item {
