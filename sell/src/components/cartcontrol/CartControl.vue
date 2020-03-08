@@ -21,12 +21,13 @@ export default {
     }
   },
   methods: {
-    increaseCart() {
+    increaseCart(event) {
       if(!this.food.count) {
         this.$set(this.food,'count',1)
       } else {
         this.food.count++
       }
+      this.$emit('cart_add',event)
     },
     decreaseCart() {
       if(this.food.count > 0) {
