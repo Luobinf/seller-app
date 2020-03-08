@@ -6,7 +6,7 @@
           <div class="logo" :class="{'highlight': totalCount>0}">
             <i class="icon-shopping_cart"></i>
           </div>
-          <div class="number">{{totalCount}}</div>
+          <div class="number" v-show="totalCount > 0">{{totalCount}}</div>
         </div>
         <div class="price" :class="{'highlight': totalPrice>0}">￥{{totalPrice}}</div>
         <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
@@ -35,10 +35,7 @@ export default {
     selectFoods: {
       type: Array,
       default() {
-        return [{
-          price:10,
-          count: 2
-        }]
+        return []
       }
     }
   },

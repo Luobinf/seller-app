@@ -72,10 +72,11 @@ export default {
       color: rgb(0,160,260);
     }
     .cart-count{
+      min-width: 24px;
+      line-height: 24px;
       font-size: 10px;
       color: rgb(147,153,159);
-      line-height: 24px;
-      padding: 0 6px;
+      text-align: center;
     }
   }
 </style>
