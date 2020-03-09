@@ -51,6 +51,9 @@
   <Dialog :show-dialog.sync="showDialog">
     一共需要支付{{totalPrice}}元
   </Dialog>
+  <Dialog :show-dialog.sync="showShopCart" @handle-confirm="clearShopCart">
+    确定清空购物车吗？
+  </Dialog>
 </div>
 </template>
 
@@ -81,7 +84,8 @@
         ],
         dropBalls: [],
         fold: true,
-        showDialog: false
+        showDialog: false,
+        showShopCart: false
       }
     },
     props: {
@@ -166,9 +170,7 @@
         }
       },
       empty() {
-        this.selectFoods.forEach((item) => {
-          item.count = 0
-        })
+        this.showShopCart = true
       },
       hideDetails() {
         this.fold = true
@@ -178,6 +180,11 @@
           return
         }
         this.showDialog = !this.showDialog
+      },
+      clearShopCart() {
+        this.selectFoods.forEach((item) => {
+          item.count = 0
+        })
       },
       drop(event) {
         // let el = event.target
