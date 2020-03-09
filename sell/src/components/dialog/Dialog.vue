@@ -127,11 +127,11 @@
       z-index: 200;
       background-color: rgba(7, 17, 24, 0.7);
 
-      &.fade2-enter-active, &.fade2-leave-active {
+      &.fade-enter-active, &.fade-leave-active {
         transition: all 0.3s;
       }
 
-      &.fade2-enter, &.fade2-leave-to {
+      &.fade-enter, &.fade-leave-to {
         opacity: 0;
         background-color: rgba(7, 17, 24, 0);
       }
