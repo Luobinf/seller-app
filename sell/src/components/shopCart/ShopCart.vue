@@ -48,33 +48,17 @@
   <transition name="fade">
     <div class="list-mask" v-show="shopcartDetailShow" @click="hideDetails"></div>
   </transition>
-  <transition name="out">
-    <div class="pay-popup-wrapper" v-show="showPayPopup">
-      <div class="pay-popup">
-        <div class="title">
-          一共需要支付{{totalPrice}}元
-        </div>
-        <div class="buttons">
-          <div class="left">
-            <button class="cancel" @click="cancel">取消</button>
-          </div>
-          <div class="right">
-            <button class="confirm" @click="confirm">确定</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
-  <transition name="fade2">
-    <div class="pay-popup-mask" v-show="showPayPopup"></div>
-  </transition>
+  <Dialog :total-price="totalPrice"
+    :show-dialog.sync="showDialog"
+  >
+  </Dialog>
 </div>
 </template>
 
 <script type="text/javascript">
   import cartControl from '../cartcontrol/CartControl.vue'
   import BScroll from '@better-scroll/core'
-
+  import Dialog from '../dialog/Dialog.vue'
   export default {
     name: 'ShopCart',
     data() {
@@ -98,7 +82,7 @@
         ],
         dropBalls: [],
         fold: true,
-        showPayPopup: false
+        showDialog: false
       }
     },
     props: {
@@ -118,7 +102,8 @@
       }
     },
     components: {
-      cartControl
+      cartControl,
+      Dialog
     },
     computed: {
       totalPrice() {
@@ -193,13 +178,7 @@
         if(this.totalPrice < this.minPrice) {
           return
         }
-        this.showPayPopup = !this.showPayPopup
-      },
-      cancel() {
-        this.showPayPopup = false
-      },
-      confirm() {
-        this.showPayPopup = false
+        this.showDialog = !this.showDialog
       },
       drop(event) {
         // let el = event.target
@@ -251,14 +230,6 @@
 </script>
 
 <style scoped lang="scss">
-  @keyframes out {
-    0% {
-      transform: scale(0.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
   .shopcart {
     position: fixed;
     z-index: 100;
@@ -482,73 +453,6 @@
       transition: all 0.3s;
     }
     &.fade-enter,&.fade-leave-to {
-      opacity: 0;
-      background-color: rgba(7,17,24,0);
-    }
-  }
-  .pay-popup-wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 200px;
-    z-index: 300;
-    transform: translate(-50%,-50%);
-    &.out-enter-active {
-      transition: all 0.3s;
-      .pay-popup {
-        animation: out 0.3s;
-      }
-    }
-    &.out-leave-active {
-      transition: all 0.3s;
-    }
-    &.out-enter,&.out-leave-to {
-      opacity: 0;
-    }
-    .pay-popup {
-      background-color: white;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-      .title {
-        padding: 30px 10px;
-        text-align: center;
-        border-bottom: 1px solid #d9dde1;
-      }
-      .buttons {
-        display: flex;
-        width: 100%;
-        .left, .right {
-          padding: 5px 10px;
-          flex: 1;
-          .cancel,.confirm {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #d9dde1;
-            border-radius: 4px;
-            background-color: white;
-            color: black;
-            &:focus {
-              outline: none;
-              border-color: #000;
-              color: orange;
-            }
-          }
-        }
-      }
-    }
-  }
-  .pay-popup-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 200;
-    background-color: rgba(7,17,24,0.7);
-    &.fade2-enter-active,&.fade2-leave-active  {
-      transition: all 0.3s;
-    }
-    &.fade2-enter,&.fade2-leave-to {
       opacity: 0;
       background-color: rgba(7,17,24,0);
     }
