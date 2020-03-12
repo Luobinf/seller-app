@@ -53,6 +53,11 @@
   </Dialog>
   <Dialog :show-dialog.sync="showShopCart" @handle-confirm="clearShopCart">
     确定清空购物车吗？
+
+  <Dialog :total-price="totalPrice"
+    :show-dialog.sync="showDialog"
+  >
+
   </Dialog>
 </div>
 </template>
@@ -84,8 +89,12 @@
         ],
         dropBalls: [],
         fold: true,
+<<<<<<< HEAD
         showDialog: false,
         showShopCart: false
+=======
+        showDialog: false
+>>>>>>> f42846dfd7f0c92ce18176e0eea3b698d3dbb53b
       }
     },
     props: {
@@ -180,11 +189,14 @@
           return
         }
         this.showDialog = !this.showDialog
+<<<<<<< HEAD
       },
       clearShopCart() {
         this.selectFoods.forEach((item) => {
           item.count = 0
         })
+=======
+>>>>>>> f42846dfd7f0c92ce18176e0eea3b698d3dbb53b
       },
       drop(event) {
         // let el = event.target
