@@ -57,7 +57,6 @@
   <Dialog :total-price="totalPrice"
     :show-dialog.sync="showDialog"
   >
-
   </Dialog>
 </div>
 </template>

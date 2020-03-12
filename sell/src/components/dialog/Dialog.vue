@@ -124,7 +124,6 @@
         }
       }
     }
-
     .mask {
       position: fixed;
       top: 0;
@@ -135,6 +134,19 @@
       background-color: rgba(7, 17, 24, 0.7);
 
       &.fade-enter-active, &.fade-leave-active {
+        transition: all 0.3s;
+      }
+
+      &.fade-enter, &.fade-leave-to {
+        &.fade2-enter-active, &.fade2-leave-active {
+          transition: all 0.3s;
+        }
+
+        &.fade2-enter, &.fade2-leave-to {
+          opacity: 0;
+          background-color: rgba(7, 17, 24, 0);
+        }
+
         transition: all 0.3s;
       }
 
