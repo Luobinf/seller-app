@@ -1,5 +1,27 @@
 <template>
   <div class="goods">
+    <div class="loading" v-if="loading">
+      <div class="container">
+        <div class="swing">
+          <div class="swing-l"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div class="swing-r"></div>
+        </div>
+        <div class="shadow">
+          <div class="shadow-l"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div class="shadow-r"></div>
+        </div>
+      </div>
+    </div>
     <div class="menu-wrapper" ref="menu-wrapper">
       <ul class="menu">
         <li v-for="(item,index) in goods" :key="item.name" class="menu-item"
@@ -16,7 +38,7 @@
         <li v-for="item in goods" class="food-list" ref="food-list">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px">
+            <li v-for="food in item.foods" class="food-item border-1px" @click="selectFood(food,$event)">
               <div class="icon">
                 <img :src="food.icon" width="58px" height="58px">
               </div>
@@ -41,9 +63,10 @@
       </ul>
     </div>
     <shop-cart :delivery-price="seller.deliveryPrice"
-      :min-price="seller.minPrice" :select-foods="selectFoods" ref="shopcart"
+               :min-price="seller.minPrice" :select-foods="selectFoods" ref="shopcart"
     >
     </shop-cart>
+    <FoodDetailPage :food="selectedFood" ref="foodDetailPage"></FoodDetailPage>
   </div>
 </template>
 
@@ -51,6 +74,7 @@
   import BScroll from '@better-scroll/core'
   import shopCart from '../shopCart/ShopCart.vue'
   import cartControl from '../cartcontrol/CartControl.vue'
+  import FoodDetailPage from "../foodDetailPage/FoodDetailPage"
 
   const ERRNO_OK = 0
 
@@ -62,6 +86,8 @@
         goods: [],
         listHeight: [],
         scrollY: 0,
+        selectedFood: {},
+        loading: false
       }
     },
     props: {
@@ -82,9 +108,9 @@
       },
       selectFoods() {
         let foods = []
-        this.goods.forEach( (good) => {
-          good.foods.forEach( (food) => {
-            if(food.count > 0) {
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count > 0) {
               foods.push(food)
             }
           })
@@ -93,15 +119,22 @@
       }
     },
     components: {
+      FoodDetailPage,
       shopCart,
       cartControl
     },
     created() {
       this.getFoodsData()
     },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route': 'getFoodsData'
+    },
     methods: {
       getFoodsData() {
+        this.loading = true
         this.$http.get('/api/goods').then((response) => {
+          this.loading = false //数据获取到了之后就关闭动画
           let {errno, data} = response.body
           if (errno === ERRNO_OK) {
             this.goods = data
@@ -150,6 +183,12 @@
       drop(event) {
         let shopcart = this.$refs.shopcart
         shopcart.drop(event)
+      },
+      selectFood(food, event) {
+        let foodDetailPage = this.$refs.foodDetailPage
+        //调用子组件的方法
+        foodDetailPage.show()
+        this.selectedFood = food
       }
     }
   }
@@ -157,6 +196,7 @@
 
 <style scoped lang="scss">
   @import "../../common/styles/mixin.scss";
+  @import "../../common/styles/animate.css";
 
   .goods {
     display: flex;
@@ -165,6 +205,15 @@
     top: 173px;
     bottom: 44px;
     /*height: calc(100vh - 173px - 46px);*/
+    .loading {
+      position: fixed;
+      top: 173px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 120;
+      background: #ede9de;
+    }
 
     .menu-wrapper {
       flex: 0 0 80px;
@@ -303,6 +352,7 @@
               text-decoration: line-through;
             }
           }
+
           .cartcontrol-wrapper {
             position: absolute;
             right: 0;
