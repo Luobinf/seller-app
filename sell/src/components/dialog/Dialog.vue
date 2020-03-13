@@ -5,7 +5,6 @@
         <div class="dialog">
           <div class="title">
             <slot></slot>
-            一共需要支付{{totalPrice}}元
           </div>
           <div class="buttons">
             <button class="cancel" @click="cancel">取消</button>
@@ -27,9 +26,6 @@
       return {}
     },
     props: {
-      totalPrice: {
-        type: [Number, String]
-      },
       showDialog: {
         type: Boolean
       }
@@ -47,6 +43,7 @@
       },
       confirm() {
         this.$emit('update:showDialog', false)
+        this.$emit('handle-confirm')
       },
     }
   }

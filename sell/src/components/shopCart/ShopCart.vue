@@ -54,10 +54,6 @@
   <Dialog :show-dialog.sync="showShopCart" @handle-confirm="clearShopCart">
     确定清空购物车吗？
   </Dialog>
-  <Dialog :total-price="totalPrice"
-    :show-dialog.sync="showDialog"
-  >
-  </Dialog>
 </div>
 </template>
 
