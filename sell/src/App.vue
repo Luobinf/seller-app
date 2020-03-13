@@ -18,7 +18,10 @@
         </router-link>
       </div>
     </div>
-    <router-view :seller="seller"/>
+    <keep-alive :include="include">
+      <router-view v-if="$route.meta.keepAlive" :seller="seller"></router-view>
+    </keep-alive>
+    <router-view :seller="seller" v-if="!$route.meta.keepAlive"/>
   </div>
 </template>
 
@@ -31,10 +34,10 @@
   export default {
     data() {
       return {
+        include: [],
         seller: {
           id: ( () => {
             let queryParam = urlParse()
-            console.log(queryParam)
             return queryParam.id
           })()
         }
@@ -52,6 +55,13 @@
       }, (error) => {
         console.log(error)
       })
+    },
+    watch: {
+      '$route' (to) {
+        if(to.meta.keepAlive) {
+          !this.include.includes(to.name) && this.include.push(to.name)
+        }
+      }
     }
   }
 </script>

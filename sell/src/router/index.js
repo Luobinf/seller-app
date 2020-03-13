@@ -13,11 +13,15 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/goods',
+    redirect: '/goods'
   },
   {
     path: '/goods',
-    component: Goods
+    name: 'Goods',
+    component: Goods,
+    meta: {
+      keepAlive: true //该路由所对应的组件需要被缓存
+    }
   },
   {
     path: '/ratings',
