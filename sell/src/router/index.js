@@ -26,12 +26,11 @@ const routes = [
   {
     path: '/seller',
     component: Seller
-  },
+  }
 ]
 
 const router = new VueRouter({
   routes,
-  mode: 'history',
 })
 
 export default router

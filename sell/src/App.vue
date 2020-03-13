@@ -13,34 +13,41 @@
         </router-link>
       </div>
       <div class="tab-item">
-        <router-link to="seller" active-class="is-active">
+        <router-link to="/seller" active-class="is-active">
           商家
         </router-link>
       </div>
     </div>
-    <router-view :seller="seller" />
+    <router-view :seller="seller"/>
   </div>
 </template>
 
 <script>
   import Header from './components/header/Header.vue'
+  import {urlParse} from './common/js/util.js'
 
   const ERRNO_OK = 0
 
   export default {
     data() {
       return {
-        seller: {}
+        seller: {
+          id: ( () => {
+            let queryParam = urlParse()
+            console.log(queryParam)
+            return queryParam.id
+          })()
+        }
       }
     },
     components: {
       'v-header': Header
     },
     created() {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get(`/api/seller?id=${this.seller.id}`).then((response) => {
         let {errno, data} = response.body
         if (errno === ERRNO_OK) {
-          this.seller = data
+          this.seller = Object.assign({},this.seller,data)
         }
       }, (error) => {
         console.log(error)
