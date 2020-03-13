@@ -60,16 +60,6 @@
               {{seller.bulletin}}
             </p>
           </div>
-          <div class="bulletin">
-            <p class="content">
-              {{seller.bulletin}}
-            </p>
-          </div>
-          <div class="bulletin">
-            <p class="content">
-              {{seller.bulletin}}
-            </p>
-          </div>
         </div>
         <div class="detail-close" @click="closeDetail">
           <i class="icon-close"></i>
