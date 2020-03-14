@@ -38,7 +38,7 @@
         <li v-for="item in goods" class="food-list" ref="food-list">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px" @click="selectFood(food,$event)">
+            <li v-for="food in item.foods" class="food-item border-1px" @click="selectFood(food)">
               <div class="icon">
                 <img :src="food.icon" width="58px" height="58px">
               </div>
@@ -132,12 +132,23 @@
     },
     methods: {
       getFoodsData() {
+        if(this.$store.state.goods.length > 0) {
+          this.goods = this.$store.state.goods
+          this.$nextTick(() => {
+            //这里确保获取到了两个ul列表的实际高度
+            this.initScroll()
+            this.calculateHeight()
+          })
+          return
+        }
         this.loading = true
         this.$http.get('/api/goods').then((response) => {
           this.loading = false //数据获取到了之后就关闭动画
           let {errno, data} = response.body
           if (errno === ERRNO_OK) {
             this.goods = data
+            //将数据保存到状态管理树中
+            this.$store.commit('updateGoods',this.goods)
             this.$nextTick(() => {
               //这里确保获取到了两个ul列表的实际高度
               this.initScroll()
@@ -184,7 +195,7 @@
         let shopcart = this.$refs.shopcart
         shopcart.drop(event)
       },
-      selectFood(food, event) {
+      selectFood(food) {
         let foodDetailPage = this.$refs.foodDetailPage
         //调用子组件的方法
         foodDetailPage.show()
