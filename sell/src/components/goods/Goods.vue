@@ -75,6 +75,7 @@
   import shopCart from '../shopCart/ShopCart.vue'
   import cartControl from '../cartcontrol/CartControl.vue'
   import FoodDetailPage from "../foodDetailPage/FoodDetailPage"
+  import axios from 'axios'
 
   const ERRNO_OK = 0
 
@@ -142,9 +143,9 @@
           return
         }
         this.loading = true
-        this.$http.get('/api/goods').then((response) => {
+        axios.get('/api/goods').then((response) => {
           this.loading = false //数据获取到了之后就关闭动画
-          let {errno, data} = response.body
+          let {errno, data} = response.data
           if (errno === ERRNO_OK) {
             this.goods = data
             //将数据保存到状态管理树中

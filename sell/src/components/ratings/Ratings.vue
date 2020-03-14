@@ -62,6 +62,7 @@
 </template>
 
 <script type="text/javascript">
+  import axios from 'axios'
   import Star from "../star/Star"
   import Split from "../split/Split"
   import RatingSelect from "../ratingselecct/RatingSelecct"
@@ -114,8 +115,8 @@
       }
     },
     created() {
-      this.$http.get('/api/ratings').then((response) => {
-        response = response.body
+      axios.get('/api/ratings').then((response) => {
+        response = response.data
         if(response.errno === ERR_OK) {}
         this.ratings = response.data
         // 虽然数据变了，但是DOM并没有立即发生变化。

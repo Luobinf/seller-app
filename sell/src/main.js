@@ -4,11 +4,7 @@ import router from './router'
 import store from './store'
 import '../src/common/styles/index.scss'
 
-import VueResource from 'vue-resource'
-
 Vue.config.productionTip = false
-
-Vue.use(VueResource)
 
 new Vue({
   router,

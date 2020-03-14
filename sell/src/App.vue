@@ -28,6 +28,7 @@
 <script>
   import Header from './components/header/Header.vue'
   import {urlParse} from './common/js/util.js'
+  import axios from 'axios'
 
   const ERRNO_OK = 0
 
@@ -47,8 +48,8 @@
       'v-header': Header
     },
     created() {
-      this.$http.get(`/api/seller?id=${this.seller.id}`).then((response) => {
-        let {errno, data} = response.body
+      axios.get(`/api/seller?id=${this.seller.id}`).then((response) => {
+        let {errno, data} = response.data
         if (errno === ERRNO_OK) {
           this.seller = Object.assign({},this.seller,data)
         }
