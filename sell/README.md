@@ -13,7 +13,7 @@ yarn serve
 
 ## 项目描述
 该项目主要有以下几个组件
-1. vHeader——头部组件
+1. vHeader——头部
 2. Goods——商品页
 3. Ratings——评价页
 4. Seller——商家页
