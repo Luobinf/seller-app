@@ -254,23 +254,23 @@
               margin-right: 2px;
 
               &.decrease {
-                @include imgTo2Or3("decrease_3");
+                @include imgTo2Or3("./imgs/decrease_3");
               }
 
               &.discount {
-                @include imgTo2Or3("discount_3");
+                @include imgTo2Or3("./imgs/discount_3");
               }
 
               &.guarantee {
-                @include imgTo2Or3("guarantee_3");
+                @include imgTo2Or3("./imgs/guarantee_3");
               }
 
               &.invoice {
-                @include imgTo2Or3("invoice_3");
+                @include imgTo2Or3("./imgs/invoice_3");
               }
 
               &.special {
-                @include imgTo2Or3("special_3");
+                @include imgTo2Or3("./imgs/special_3");
               }
             }
           }

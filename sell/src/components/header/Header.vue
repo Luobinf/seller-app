@@ -135,7 +135,7 @@
             display: inline-block;
             width: 30px;
             height: 18px;
-            @include imgTo2Or3("brand");
+            @include imgTo2Or3("./imgs/brand");
             background-size: 30px 18px;
             background-repeat: no-repeat;
           }
@@ -164,23 +164,23 @@
             background-repeat: no-repeat;
 
             &.decrease {
-              @include imgTo2Or3("decrease_1");
+              @include imgTo2Or3("./imgs/decrease_1");
             }
 
             &.discount {
-              @include imgTo2Or3("discount_1");
+              @include imgTo2Or3("./imgs/discount_1");
             }
 
             &.guarantee {
-              @include imgTo2Or3("guarantee_1");
+              @include imgTo2Or3("./imgs/guarantee_1");
             }
 
             &.invoice {
-              @include imgTo2Or3("invoice_1");
+              @include imgTo2Or3("./imgs/invoice_1");
             }
 
             &.special {
-              @include imgTo2Or3("special_1");
+              @include imgTo2Or3("./imgs/special_1");
             }
           }
 
@@ -227,7 +227,7 @@
         display: inline-block;
         width: 23px;
         height: 12px;
-        @include imgTo2Or3("bulletin");
+        @include imgTo2Or3("./imgs/bulletin");
         background-size: 23px 12px;
         background-repeat: no-repeat;
         vertical-align: top;
@@ -334,23 +334,23 @@
               margin-right: 6px;
 
               &.decrease {
-                @include imgTo2Or3("decrease_2");
+                @include imgTo2Or3("./imgs/decrease_2");
               }
 
               &.discount {
-                @include imgTo2Or3("discount_2");
+                @include imgTo2Or3("./imgs/discount_2");
               }
 
               &.special {
-                @include imgTo2Or3("special_2");
+                @include imgTo2Or3("./imgs/special_2");
               }
 
               &.invoice {
-                @include imgTo2Or3("invoice_2");
+                @include imgTo2Or3("./imgs/invoice_2");
               }
 
               &.guarantee {
-                @include imgTo2Or3("guarantee_2");
+                @include imgTo2Or3("./imgs/guarantee_2");
               }
             }
 

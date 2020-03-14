@@ -3,6 +3,8 @@ const seller = appData.seller
 const goods = appData.goods
 const ratings = appData.ratings
 
+const path = require('path')
+
 module.exports = {
     devServer: {
         before(app) {

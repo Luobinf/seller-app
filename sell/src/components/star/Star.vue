@@ -75,15 +75,15 @@
         }
 
         &.on {
-          @include imgTo2Or3("star48_on");
+          @include imgTo2Or3("./imgs/star48_on");
         }
 
         &.half {
-          @include imgTo2Or3("star48_half");
+          @include imgTo2Or3("./imgs/star48_half");
         }
 
         &.off {
-          @include imgTo2Or3("star48_off");
+          @include imgTo2Or3("./imgs/star48_off");
         }
       }
     }
@@ -100,15 +100,15 @@
         }
 
         &.on {
-          @include imgTo2Or3("star36_on");
+          @include imgTo2Or3("./imgs/star36_on");
         }
 
         &.half {
-          @include imgTo2Or3("star36_half");
+          @include imgTo2Or3("./imgs/star36_half");
         }
 
         &.off {
-          @include imgTo2Or3("star36_off");
+          @include imgTo2Or3("./imgs/star36_off");
         }
       }
     }
@@ -125,15 +125,15 @@
         }
 
         &.on {
-          @include imgTo2Or3("star24_on");
+          @include imgTo2Or3("./imgs/star24_on");
         }
 
         &.half {
-          @include imgTo2Or3("star24_half");
+          @include imgTo2Or3("./imgs/star24_half");
         }
 
         &.off {
-          @include imgTo2Or3("star24_off");
+          @include imgTo2Or3("./imgs/star24_off");
         }
       }
     }

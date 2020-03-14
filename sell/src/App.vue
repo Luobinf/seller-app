@@ -18,10 +18,10 @@
         </router-link>
       </div>
     </div>
-    <keep-alive :include="include">
-      <router-view v-if="$route.meta.keepAlive" :seller="seller"></router-view>
-    </keep-alive>
-    <router-view :seller="seller" v-if="!$route.meta.keepAlive"/>
+<!--    <keep-alive :include="include">-->
+<!--      <router-view v-if="$route.meta.keepAlive" :seller="seller"></router-view>-->
+<!--    </keep-alive>-->
+    <router-view :seller="seller"/>
   </div>
 </template>
 

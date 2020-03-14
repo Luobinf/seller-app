@@ -287,23 +287,23 @@ export default {
             margin-right: 6px;
 
             &.decrease {
-              @include imgTo2Or3("decrease_4");
+              @include imgTo2Or3("./imgs/decrease_4");
             }
 
             &.discount {
-              @include imgTo2Or3("discount_4");
+              @include imgTo2Or3("./imgs/discount_4");
             }
 
             &.special {
-              @include imgTo2Or3("special_4");
+              @include imgTo2Or3("./imgs/special_4");
             }
 
             &.invoice {
-              @include imgTo2Or3("invoice_4");
+              @include imgTo2Or3("./imgs/invoice_4");
             }
 
             &.guarantee {
-              @include imgTo2Or3("guarantee_4");
+              @include imgTo2Or3("./imgs/guarantee_4");
             }
           }
           .text {
