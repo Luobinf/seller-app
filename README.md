@@ -20,7 +20,7 @@ yarn serve
 5.foodDetailPage——商品详情页
 等其它组件。
 并根据项目抽象成了其它几个通用小组件: 有**Dialog、CartControl、Star、Split**等组件。
-并使用了better-scroll js库，用于解决移动端各种滚动需求。
+并使用了better-scroll js库，用于解决该项目中的各种滚动需求。
 
 ## 遇到的问题和解决方案
 
